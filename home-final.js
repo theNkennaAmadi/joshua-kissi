@@ -1,4 +1,28 @@
 /**
+ * Preloader
+ */
+window.addEventListener("load", () => {
+  let count = 0;
+  let counterArray = [0, 36, 48, 64, 72, 84, 92, 100];
+  let preload = setInterval(() => {
+    console.log(counterArray[count]);
+    document.querySelector(
+      "#preloader-num"
+    ).textContent = `${counterArray[count]}%`;
+    count++;
+    if (count === counterArray.length) {
+      clearInterval(preload);
+      let tlPre = gsap.timeline();
+      tlPre.to("#preloader-num", { y: "130%" });
+      tlPre.to("#preText", { y: "130%" }, "<");
+      tlPre.to(".preloader-logo", { opacity: 0 }, "<");
+      tlPre.to(".page-preloader", { opacity: 0 });
+      tlPre.to(".page-preloader", { display: "none" });
+    }
+  }, 150);
+});
+
+/**
  * Grade Js
  */
 (function (f) {
@@ -100,7 +124,7 @@
               this.ctx = this.canvas.getContext("2d");
               this.imageDimensions = {
                 width: 0,
-                height: 0
+                height: 0,
               };
               this.imageData = [];
               this.readImage();
@@ -113,7 +137,7 @@
                   this.imageDimensions.width = this.image.width * 0.1;
                   this.imageDimensions.height = this.image.height * 0.1;
                   this.render();
-                }
+                },
               },
               {
                 key: "getImageData",
@@ -125,7 +149,7 @@
                     this.imageDimensions.height
                   ).data;
                   this.imageData = Array.from(imageData);
-                }
+                },
               },
               {
                 key: "getChunkedImageData",
@@ -152,7 +176,7 @@
                     );
                   });
                   return filtered;
-                }
+                },
               },
               {
                 key: "getRGBAGradientValues",
@@ -184,7 +208,7 @@
                   let black = "rgb(0,0,0) 44%,";
                   //console.log(black.concat(end));
                   return black.concat(end);
-                }
+                },
               },
               {
                 key: "getCSSGradientProperty",
@@ -203,10 +227,10 @@
                     .concat([
                       "background-image: linear-gradient(\n                    180deg,\n                    " +
                         val +
-                        "\n                )"
+                        "\n                )",
                     ])
                     .join(";");
-                }
+                },
               },
               {
                 key: "getMiddleRGB",
@@ -217,11 +241,11 @@
                   var rgb = [
                     parseInt(start[0] * w1 + end[0] * w2),
                     parseInt(start[1] * w1 + end[1] * w2),
-                    parseInt(start[2] * w1 + end[2] * w2)
+                    parseInt(start[2] * w1 + end[2] * w2),
                   ];
                   //console.log(`rgb: ${rgb}`);
                   return rgb;
-                }
+                },
               },
               {
                 key: "getSortedValues",
@@ -238,7 +262,7 @@
                       return {
                         rgba: rgbaKey.split("|"),
                         occurs: uniq[key],
-                        brightness: brightness
+                        brightness: brightness,
                       };
                     })
                     .sort(function (a, b) {
@@ -251,7 +275,7 @@
                       return a.brightness - b.brightness;
                     })
                     .reverse();
-                }
+                },
               },
               {
                 key: "getTextProperty",
@@ -271,14 +295,14 @@
                   } else {
                     return "color: #fff";
                   }
-                }
+                },
               },
               {
                 key: "getTopValues",
                 value: function getTopValues(uniq) {
                   var sorted = this.getSortedValues(uniq);
                   return [sorted[0], sorted[sorted.length - 1]];
-                }
+                },
               },
               {
                 key: "getUniqValues",
@@ -292,7 +316,7 @@
                     accum[key] = ++accum[key];
                     return accum;
                   }, {});
-                }
+                },
               },
               {
                 key: "renderGradient",
@@ -328,7 +352,7 @@
                     "; " +
                     textProperty;
                   this.container.setAttribute("style", style);
-                }
+                },
               },
               {
                 key: "render",
@@ -344,8 +368,8 @@
                   );
                   this.getImageData();
                   this.renderGradient();
-                }
-              }
+                },
+              },
             ]);
 
             return Grade;
@@ -360,14 +384,15 @@
               }
               return {
                 element: container,
-                gradientData: gradientData
+                gradientData: gradientData,
               };
             };
-            var results = (NodeList.prototype.isPrototypeOf(containers)
-              ? Array.from(containers).map(function (container) {
-                  return init(container, img_selector, callback);
-                })
-              : [init(containers, img_selector, callback)]
+            var results = (
+              NodeList.prototype.isPrototypeOf(containers)
+                ? Array.from(containers).map(function (container) {
+                    return init(container, img_selector, callback);
+                  })
+                : [init(containers, img_selector, callback)]
             ).filter(Boolean);
 
             if (results.length) {
@@ -375,8 +400,8 @@
             }
           };
         },
-        {}
-      ]
+        {},
+      ],
     },
     {},
     [1]
@@ -396,11 +421,8 @@ window.addEventListener("load", function () {
   Grade(document.querySelectorAll(".m-img"));
   allItems.map((section) => {
     if (section.querySelector(".m-img")) {
-      section.querySelector(
-        ".hp-section-bg"
-      ).style.backgroundImage = section.querySelector(
-        ".m-img"
-      ).style.backgroundImage;
+      section.querySelector(".hp-section-bg").style.backgroundImage =
+        section.querySelector(".m-img").style.backgroundImage;
     }
   });
 });
@@ -425,8 +447,8 @@ const swiper = new Swiper(".swiper", {
   },
   keyboard: {
     enabled: true,
-    onlyInViewport: true
-  }
+    onlyInViewport: true,
+  },
   /*
   breakpoints: {
     // mobile landscape
@@ -482,7 +504,7 @@ const sliderDetails = () => {
   gsap.to(".hp-index-inner-container", {
     width: scrollProgress,
     ease: "expo.inOut",
-    duration: 1
+    duration: 1,
   });
 };
 window.addEventListener("DOMContentLoaded", () => {
@@ -550,7 +572,7 @@ let mSections = [...document.querySelectorAll(".section")];
 const options = {
   root: document.querySelector(".main"),
   rootMargin: "0px 0px 0% 0px",
-  threshold: 0.8
+  threshold: 0.8,
 };
 
 let callback = (entries) => {
@@ -575,13 +597,11 @@ let callback = (entries) => {
           gsap.to(allNext, { y: "110%", ease: "expo.inOut" });
         }
         gsap.to(indexNodes[index - 1], { y: "0%", ease: "expo.inOut" });
-        bgImageAfter.style.backgroundImage = entry.target.querySelector(
-          ".hp-section-bg"
-        ).style.backgroundImage;
+        bgImageAfter.style.backgroundImage =
+          entry.target.querySelector(".hp-section-bg").style.backgroundImage;
         bgImageAfter.style.opacity = 1;
-        bgImage.style.backgroundImage = entry.target.querySelector(
-          ".hp-section-bg"
-        ).style.backgroundImage;
+        bgImage.style.backgroundImage =
+          entry.target.querySelector(".hp-section-bg").style.backgroundImage;
         bgImageAfter.style.opacity = 0;
       }
     } else {
