@@ -1,7 +1,7 @@
 /**
  * Preloader
  */
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   let count = 0;
   let counterArray = [0, 36, 48, 64, 72, 84, 92, 100];
   let preload = setInterval(() => {
