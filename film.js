@@ -81,7 +81,7 @@ const swiperChange = () => {
       video.querySelector("video").currentTime = 0;
       video.querySelector("video").pause();
     } else {
-      console.log(index);
+      //console.log(index);
       video.querySelector("video").play();
     }
   });
