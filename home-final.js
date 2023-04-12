@@ -1,7 +1,6 @@
 /**
  * Preloader
  */
-
 let count = 1;
 let counterArray = [0, 36, 48, 64, 72, 84, 92, 100];
 document.querySelector(
