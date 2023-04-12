@@ -21,7 +21,6 @@ let video = document.querySelector("video"),
 let dLine = [...document.querySelectorAll(".d-line")];
 
 video.addEventListener("loadedmetadata", () => {
-  console.log("hello");
   let duration = video.duration;
   let number = Math.round(
     (document.querySelector(".video-duration-wrapper").clientWidth * 0.4) / 2
@@ -191,7 +190,7 @@ video.addEventListener(
       canvas.height = video.offsetHeight / 14;
       const context = canvas.getContext("2d");
       video.currentTime = i;
-      console.log(i, canvas);
+      //console.log(i, canvas);
       await new Promise(function (rsv) {
         const event = function () {
           context.drawImage(
@@ -201,7 +200,6 @@ video.addEventListener(
             video.offsetWidth / 14,
             video.offsetHeight / 14
           );
-          console.log(context);
           let imageUrl = canvas.toDataURL("image/webp");
           let imageContainer = document.createElement("div");
           imageContainer.classList.add("thumb-container");
@@ -219,16 +217,10 @@ video.addEventListener(
         video.addEventListener("canplay", event);
       });
     }
-    console.log("thumbnails loaded");
+    //console.log("thumbnails loaded");
     gsap.to(".loader-wrapper", { opacity: 0 });
     gsap.to(".loader-wrapper", { display: "none" });
     document.querySelector(".thumbnails-wrapper").replaceChildren(...thumbs);
-    console.log(
-      document.querySelector(".thumbnails-wrapper").getBoundingClientRect()
-    );
-    console.log(
-      document.querySelector(".duration-lines-wrapper").getBoundingClientRect()
-    );
     video.currentTime = 0;
     //video.play();
     video.muted = false;
@@ -270,7 +262,6 @@ let tl = gsap.timeline({
           .classList.contains("paused");
         //console.log(hasBeenPaused);
         if (!hasBeenPaused) {
-          console.log("hello");
           video.pause();
           document.querySelector(".ft-hero-grid").classList.add("paused");
         }
