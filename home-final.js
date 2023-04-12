@@ -26,6 +26,95 @@ window.addEventListener("load", () => {
 });
 
 /**
+ * Hero Slider
+ */
+const swiper = new Swiper(".swiper", {
+  speed: 600,
+  loop: true,
+  autoHeight: false,
+  centeredSlides: true,
+  followFinger: true,
+  mousewheelControl: true,
+  freeMode: true,
+  slideToClickedSlide: false,
+  slidesPerView: "auto",
+  spaceBetween: "3%",
+  rewind: false,
+  mousewheel: {
+    //forceToAxis: true
+  },
+  keyboard: {
+    enabled: true,
+    onlyInViewport: true,
+  },
+  /*
+  breakpoints: {
+    // mobile landscape
+    480: {
+      slidesPerView: 2,
+      spaceBetween: "4%"
+    },
+    // tablet
+    768: {
+      slidesPerView: 3,
+      spaceBetween: "4%"
+    },
+    // desktop
+    992: {
+      slidesPerView: 5,
+      spaceBetween: "3%"
+    }
+  }
+  */
+});
+const hVideos = [...document.querySelectorAll(".hp-carousel video")];
+const sliderDetails = () => {
+  if (
+    document.querySelector(".swiper-slide-active").querySelector("[p-type]")
+      .textContent === "Motion"
+  ) {
+    document
+      .querySelector(".swiper-slide-active")
+      .querySelector("video")
+      .play();
+  } else {
+    hVideos.map((video) => {
+      video.currentTime = 0;
+      video.pause();
+    });
+  }
+  document.querySelector("[c-type]").textContent = document
+    .querySelector(".swiper-slide-active")
+    .querySelector("[p-type]").textContent;
+  document.querySelector("[c-title]").textContent = document
+    .querySelector(".swiper-slide-active")
+    .querySelector("[p-title]").textContent;
+  document.querySelector("[c-index]").textContent = document
+    .querySelector(".swiper-slide-active")
+    .querySelector("[p-index]").textContent;
+  let scrollProgress =
+    (parseFloat(
+      document.querySelector(".swiper-slide-active").querySelector("[p-index]")
+        .textContent
+    ) /
+      8) *
+    100;
+  gsap.to(".hp-index-inner-container", {
+    width: scrollProgress,
+    ease: "expo.inOut",
+    duration: 1,
+  });
+};
+window.addEventListener("DOMContentLoaded", () => {
+  sliderDetails();
+});
+swiper.on("activeIndexChange", function () {
+  setTimeout(() => {
+    sliderDetails();
+  }, 600);
+});
+
+/**
  * Grade Js
  */
 (function (f) {
@@ -428,95 +517,6 @@ window.addEventListener("load", function () {
         section.querySelector(".m-img").style.backgroundImage;
     }
   });
-});
-
-/**
- * Hero Slider
- */
-const swiper = new Swiper(".swiper", {
-  speed: 600,
-  loop: true,
-  autoHeight: false,
-  centeredSlides: true,
-  followFinger: true,
-  mousewheelControl: true,
-  freeMode: true,
-  slideToClickedSlide: false,
-  slidesPerView: "auto",
-  spaceBetween: "3%",
-  rewind: false,
-  mousewheel: {
-    //forceToAxis: true
-  },
-  keyboard: {
-    enabled: true,
-    onlyInViewport: true,
-  },
-  /*
-  breakpoints: {
-    // mobile landscape
-    480: {
-      slidesPerView: 2,
-      spaceBetween: "4%"
-    },
-    // tablet
-    768: {
-      slidesPerView: 3,
-      spaceBetween: "4%"
-    },
-    // desktop
-    992: {
-      slidesPerView: 5,
-      spaceBetween: "3%"
-    }
-  }
-  */
-});
-const hVideos = [...document.querySelectorAll(".hp-carousel video")];
-const sliderDetails = () => {
-  if (
-    document.querySelector(".swiper-slide-active").querySelector("[p-type]")
-      .textContent === "Motion"
-  ) {
-    document
-      .querySelector(".swiper-slide-active")
-      .querySelector("video")
-      .play();
-  } else {
-    hVideos.map((video) => {
-      video.currentTime = 0;
-      video.pause();
-    });
-  }
-  document.querySelector("[c-type]").textContent = document
-    .querySelector(".swiper-slide-active")
-    .querySelector("[p-type]").textContent;
-  document.querySelector("[c-title]").textContent = document
-    .querySelector(".swiper-slide-active")
-    .querySelector("[p-title]").textContent;
-  document.querySelector("[c-index]").textContent = document
-    .querySelector(".swiper-slide-active")
-    .querySelector("[p-index]").textContent;
-  let scrollProgress =
-    (parseFloat(
-      document.querySelector(".swiper-slide-active").querySelector("[p-index]")
-        .textContent
-    ) /
-      8) *
-    100;
-  gsap.to(".hp-index-inner-container", {
-    width: scrollProgress,
-    ease: "expo.inOut",
-    duration: 1,
-  });
-};
-window.addEventListener("DOMContentLoaded", () => {
-  sliderDetails();
-});
-swiper.on("activeIndexChange", function () {
-  setTimeout(() => {
-    sliderDetails();
-  }, 600);
 });
 
 /**
