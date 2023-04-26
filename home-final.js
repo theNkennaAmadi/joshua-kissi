@@ -1,4 +1,5 @@
 const hVideos = [...document.querySelectorAll(".hp-carousel video")];
+hVideos.forEach(video=>{video.load()})
 /**
  * Preloader
  */
@@ -8,7 +9,7 @@ document.querySelector(
   "#preloader-num"
 ).textContent = `${counterArray[count]}%`;
 window.addEventListener("load", () => {
-  console.log(hVideos);
+  //console.log(hVideos);
   let preload = setInterval(() => {
     document.querySelector(
       "#preloader-num"
