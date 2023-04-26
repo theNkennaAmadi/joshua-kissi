@@ -1,5 +1,3 @@
-const hVideos = [...document.querySelectorAll(".hp-carousel video")];
-hVideos.forEach(video=>{video.load()})
 /**
  * Preloader
  */
@@ -9,7 +7,6 @@ document.querySelector(
   "#preloader-num"
 ).textContent = `${counterArray[count]}%`;
 window.addEventListener("load", () => {
-  //console.log(hVideos);
   let preload = setInterval(() => {
     document.querySelector(
       "#preloader-num"
@@ -42,34 +39,25 @@ const swiper = new Swiper(".swiper", {
   slidesPerView: "auto",
   spaceBetween: "3%",
   rewind: false,
-  mousewheel: {
-    //forceToAxis: true
-  },
   keyboard: {
     enabled: true,
     onlyInViewport: true,
   },
-  /*
-  breakpoints: {
-    // mobile landscape
-    480: {
-      slidesPerView: 2,
-      spaceBetween: "4%"
+  on: {
+    init: function () {
+      const tVideos = [
+        ...document.querySelectorAll(
+          ".hp-carousel.swiper-slide-duplicate video"
+        ),
+      ];
+      console.log(tVideos);
+      tVideos.forEach((video) => {
+        video.load();
+      });
     },
-    // tablet
-    768: {
-      slidesPerView: 3,
-      spaceBetween: "4%"
-    },
-    // desktop
-    992: {
-      slidesPerView: 5,
-      spaceBetween: "3%"
-    }
-  }
-  */
+  },
 });
-
+const hVideos = [...document.querySelectorAll(".hp-carousel video")];
 const sliderDetails = () => {
   if (
     document.querySelector(".swiper-slide-active").querySelector("[p-type]")
@@ -527,46 +515,6 @@ window.addEventListener("load", function () {
 let bgImage = document.querySelector(".bg-background");
 let bgImageAfter = document.querySelector(".bg-background-after");
 
-/*
-gsap.set("[data-splitting], .text-link-wrapper", { opacity: 0 });
-let firstItem = [
-  document.querySelector("[data-splitting]"),
-  document.querySelector(".text-link-wrapper")
-];
-gsap.set(firstItem, { opacity: 1 });
-*/
-
-/*
-let sections = [...document.querySelectorAll(".section.hero")];
-
-sections.map((section) => {
-  ScrollTrigger.create({
-    trigger: section,
-    start: 0,
-    end: "max",
-    snap: true,
-    onEnter: () => {}
-  });
-});
-*/
-/*
-const sections = gsap.utils.toArray(".section.hero");
-
-ScrollTrigger.create({
-  trigger: ".section.hero.is-1",
-  start: "top top",
-  endTrigger: ".section.hero.is-7",
-  end: "bottom bottom",
-
-  //snap: 1 / (sections.length - 1)
-
-  snap: {
-    snapTo: 1 / (sections.length - 1),
-    duration: { min: 0.25, max: 0.75 }, // the snap animation should be at least 0.25 seconds, but no more than 0.75 seconds (determined by velocity)
-    ease: "power1.inOut" // the ease of the snap animation ("power3" by default)
-  }
-});
-*/
 let mm = gsap.matchMedia();
 
 // add a media query. When it matches, the associated function will run
