@@ -1,3 +1,4 @@
+const hVideos = [...document.querySelectorAll(".hp-carousel video")];
 /**
  * Preloader
  */
@@ -7,8 +8,8 @@ document.querySelector(
   "#preloader-num"
 ).textContent = `${counterArray[count]}%`;
 window.addEventListener("load", () => {
+  console.log(hVideos);
   let preload = setInterval(() => {
-    console.log(counterArray[count]);
     document.querySelector(
       "#preloader-num"
     ).textContent = `${counterArray[count]}%`;
@@ -67,7 +68,7 @@ const swiper = new Swiper(".swiper", {
   }
   */
 });
-const hVideos = [...document.querySelectorAll(".hp-carousel video")];
+
 const sliderDetails = () => {
   if (
     document.querySelector(".swiper-slide-active").querySelector("[p-type]")
