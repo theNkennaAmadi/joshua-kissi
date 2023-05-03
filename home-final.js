@@ -6,7 +6,7 @@ let counterArray = [0, 36, 48, 64, 72, 84, 92, 100];
 document.querySelector(
   "#preloader-num"
 ).textContent = `${counterArray[count]}%`;
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   let preload = setInterval(() => {
     document.querySelector(
       "#preloader-num"
